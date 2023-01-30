@@ -1,22 +1,16 @@
 # Instructions
 
-This repo is intended to act as a technical interview. Please make sure you follow the instructions and meet the listed requirements. Do not hesitate to ask questions if you are having trouble. You are alos free to use Google, or any other web resources you may have. The idea of this technical excercise is to determine the asignee's troubleshooting skills. 
-
-
+This repo is intended to act as a technical interview. Please make sure you follow the instructions and meet the listed requirements. Do not hesitate to ask questions if you are having trouble. You are also free to use Google, or any other web resources you may have. The idea of this technical exercise is to determine the assignee's troubleshooting skills. 
 
 ## Requirements:
 
 Please have access to the following requirements. Docker resources can be provided if you do not have the ability to run docker locally.
-
-
 
 * A Python compatible IDE - VS Code or Pycharm will function and are free. You amy also use any other IDE you wish.
 
 * Docker/Docker Desktop - A local instance of docker or a remote instance
 
 * Docker Compose
-  
-  
 
 **Links**
 
@@ -30,33 +24,25 @@ Please have access to the following requirements. Docker resources can be provid
 
 [Download PyCharm](https://www.jetbrains.com/pycharm/download/)
 
-
-
 ## Problem
 
-Take the following application and convert it to a dockerised application. The end result should be written in a compose file.
-
-
+Take the following application and convert it to a dockerized application. The end result should be written in a compose file.
 
 ### Containers
 
 Create the following containers based on the provided source code. **Bonus if done using multi stage builds**. Reference the bin/build.sh script for a hint.
 
-
-
-**Recomendations:** A solution that has been tested uses the `python:3.10.9-slim-bullseye` docker image. 
-
-
+**Recommendations:** A solution that has been tested uses the `python:3.10.9-slim-bullseye` docker image. 
 
 1. Application container that runs the FastAPI app.
    
-   1. Configure the contianer to listen on port 80
+   1. Configure the container to listen on port 80
    
-   2.  App requirements are listed in requirements.txt
+   2. App requirements are listed in requirements.txt
    
    3. Working directory should be **/app** and source should be included in **/app/api**
    
-   4. ``` ini
+   4. ```ini
       CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "80"]
       ```
 
@@ -66,7 +52,7 @@ Create the following containers based on the provided source code. **Bonus if do
    
    2. Does not require any ports to be open
    
-   3. Working Directory shold be **/app**
+   3. Working Directory should be **/app**
    
    4. ```ini
       CMD ["rq", "worker", "-c", "rq_worker"]
@@ -74,7 +60,7 @@ Create the following containers based on the provided source code. **Bonus if do
 
 3. Scheduler Container
    
-   1. Does not need project code, requires dependencied defined in the **requirements.txt** file
+   1. Does not need project code, requires dependencies defined in the **requirements.txt** file
    
    2. Set the following ENV variables
       
@@ -94,8 +80,6 @@ Create the following containers based on the provided source code. **Bonus if do
 
 Create a docker compose file to manage the app. You can use the following template to expand upon.
 
-
-
 ```yaml
 version: '3'
 
@@ -111,25 +95,16 @@ services:
 
   scheduler:
     image: scheduler
-    
 ```
 
-The worker and scheduler containers depend on the redis container to function. Once completed attempr to run the application with docker-compose
-
-
+The worker and scheduler containers depend on the redis container to function. Once completed, attempt to run the application with docker-compose
 
 ### Testing
 
 To test the application is working you should be bale to browse to http://localhost/docs
 
-If you get a response the app is working. You are free to attpent to run the workers/status api endpoint
-
-
+If you get a response the app is working. You are free to attempt to run the workers/status api endpoint
 
 ### Troubleshooting
 
 The bin directory contains a **workers.py** utility  that you can pass --help to for command output. If you have a local running version of redis you can use this to fire up local version of required worker services to validate the locally running application works.
-
-
-
-
