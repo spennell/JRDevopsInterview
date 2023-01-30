@@ -28,6 +28,23 @@ Please have access to the following requirements. Docker resources can be provid
 
 Take the following application and convert it to a dockerized application. The end result should be written in a compose file.
 
+
+
+##### App Prequisites
+
+Create a **.env** file in the **app** directory
+
+```ini
+REDIS_HOST = "redis"
+REDIS_DB = 0
+REDIS_PORT = 6379
+REDIS_QUEUE = "QUEUE1"
+```
+
+If you want to run the app locally for testing as part of troubleshooting as outlined below or would like to run the app locally make sure you have a local copy of redis running and update the **.env** accordingly. 
+
+
+
 ### Containers
 
 Create the following containers based on the provided source code. **Bonus if done using multi stage builds**. Reference the bin/build.sh script for a hint.
