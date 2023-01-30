@@ -30,7 +30,7 @@ Take the following application and convert it to a dockerized application. The e
 
 
 
-##### Local App Requirements
+##### Local App Prerequisites
 
 If you want to run the app locally for testing as part of troubleshooting as outlined below or would like to run the app locally make sure you have a local copy of redis running and update the **.env** accordingly.
 
@@ -49,7 +49,7 @@ REDIS_QUEUE = "QUEUE1"
 
 ### Containers
 
-Create the following containers based on the provided source code. **Bonus if done using multi-stage builds**. Reference the bin/build.sh script for a hint.
+Create the following containers based on the provided source code. **Bonus if done using multi stage builds**. Reference the bin/build.sh script for a hint.
 
 **Recommendations:** A solution that has been tested uses the `python:3.10.9-slim-bullseye` docker image. 
 
@@ -59,7 +59,7 @@ Create the following containers based on the provided source code. **Bonus if do
    
    2. App requirements are listed in requirements.txt
    
-   3. Working directory should be **/app** and source should be included in **/app/api**
+   3. Working directory should be **/app** and source should be included in **/app/api**, be sure to include the **.env.docker** file as **.env** in the **api** directory. 
    
    4. ```ini
       CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
@@ -67,11 +67,11 @@ Create the following containers based on the provided source code. **Bonus if do
 
 2. Worker Container
    
-   1. Should contain the project code and requires access to **rq_worker.py**
+   1. Working Directory should be **/app**
    
-   2. Does not require any ports to be open
+   2. The worker container should contain the project code and requires access to **rq_worker.py**, be sure to include the **.env.docker** file as **.env** in the working directory.
    
-   3. Working Directory should be **/app**
+   3. Does not require any ports to be open
    
    4. ```ini
       CMD ["rq", "worker", "-c", "rq_worker"]
@@ -128,8 +128,9 @@ If you get a response the app is working. You are free to attempt to run the wor
 
 ### Bonus
 
-Create an additional container to leverage nginx as a reverse proxy.
+1. Create an additional container to leverage nginx as a reverse proxy.
 
+2. What improvements would you make to the containerization process or app layout to improve the deployment?
 
 
 
