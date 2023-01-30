@@ -12,9 +12,8 @@ api = APIRouter()
 
 @api.get("/status", response_model=WorkersStatusResponse)
 async def get_worker_status():
-    worker_mgr = Workers()
-    worker = True if worker_mgr.list() else False
-    scheduler = True if worker_mgr.scheduler_id() else False
+    worker = True if Workers.list() else False
+    scheduler = True if Workers.scheduler_id() else False
     healthy = worker and scheduler
 
     return WorkersStatusResponse(

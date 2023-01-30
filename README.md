@@ -30,9 +30,13 @@ Take the following application and convert it to a dockerized application. The e
 
 
 
-##### App Prequisites
+##### Local App Requirements
 
-Create a **.env** file in the **app** directory
+If you want to run the app locally for testing as part of troubleshooting as outlined below or would like to run the app locally make sure you have a local copy of redis running and update the **.env** accordingly.
+
+
+
+Create a **.env** file in the **app** directory. You may copy **.env.docker** or use the following template.
 
 ```ini
 REDIS_HOST = "redis"
@@ -41,13 +45,11 @@ REDIS_PORT = 6379
 REDIS_QUEUE = "QUEUE1"
 ```
 
-If you want to run the app locally for testing as part of troubleshooting as outlined below or would like to run the app locally make sure you have a local copy of redis running and update the **.env** accordingly. 
-
 
 
 ### Containers
 
-Create the following containers based on the provided source code. **Bonus if done using multi stage builds**. Reference the bin/build.sh script for a hint.
+Create the following containers based on the provided source code. **Bonus if done using multi-stage builds**. Reference the bin/build.sh script for a hint.
 
 **Recommendations:** A solution that has been tested uses the `python:3.10.9-slim-bullseye` docker image. 
 
@@ -60,7 +62,7 @@ Create the following containers based on the provided source code. **Bonus if do
    3. Working directory should be **/app** and source should be included in **/app/api**
    
    4. ```ini
-      CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "80"]
+      CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
       ```
 
 2. Worker Container
@@ -116,11 +118,20 @@ services:
 
 The worker and scheduler containers depend on the redis container to function. Once completed, attempt to run the application with docker-compose
 
-### Testing
+### Validation
 
 To test the application is working you should be bale to browse to http://localhost/docs
 
 If you get a response the app is working. You are free to attempt to run the workers/status api endpoint
+
+
+
+### Bonus
+
+Create an additional container to leverage nginx as a reverse proxy.
+
+
+
 
 ### Troubleshooting
 

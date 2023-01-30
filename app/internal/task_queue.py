@@ -47,13 +47,12 @@ class Jobs:
 
 
 class Workers:
-    r = Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
-    q = Queue(settings.REDIS_QUEUE, connection=r)
-
-    def list(self):
-        workers = Worker.all(self.r)
+    @staticmethod
+    def list():
+        workers = Worker.all(r)
         return workers
 
-    def scheduler_id(self):
-        scheduler = Scheduler(settings.REDIS_QUEUE, connection=self.r)
+    @staticmethod
+    def scheduler_id():
+        scheduler = Scheduler(settings.REDIS_QUEUE, connection=r)
         return scheduler.pid
