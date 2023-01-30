@@ -1,2 +1,4 @@
+.idea
+/server
 /docker/compose.yml
 /docker/Dockerfile
